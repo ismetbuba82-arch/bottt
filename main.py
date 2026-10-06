@@ -41,7 +41,6 @@ def run_web():
 
 
 def limitleri_yukle():
-  # Dosya yoksa otomatik oluştur
   if not os.path.exists(LIMIT_DOSYASI):
     try:
       with open(LIMIT_DOSYASI, "w", encoding="utf-8") as f:
@@ -246,7 +245,6 @@ def callback_query(call):
     func=lambda message: message.chat.type == "private"
     and not message.text.startswith("/")
 )
-    
 def handle_message(message):
   user_id = message.chat.id
 
@@ -314,6 +312,4 @@ if __name__ == "__main__":
       print(f"[BAĞLANTI KOPTU] Tekrar bağlanılıyor: {e}")
       time.sleep(3)
       
-
-
     
