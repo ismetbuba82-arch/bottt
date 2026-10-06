@@ -40,9 +40,6 @@ def run_web():
   app.run(host="0.0.0.0", port=port)
 
 
-# ----------------------------------------
-
-
 def limitleri_yukle():
   if os.path.exists(LIMIT_DOSYASI):
     try:
@@ -186,7 +183,7 @@ def show_kurumlar(user_id):
       f"🚨 **İhbar Menüsü**\n👑 Kurucu: {KURUCU}\n📊 Kalan Hakkınız:"
       f" {kalan_hak}\n\nLütfen kurumu seçin:",
       reply_markup=markup,
-      parse_mode="Markdown",'
+      parse_mode="Markdown",
   )
 
 
@@ -290,7 +287,7 @@ def handle_message(message):
         parse_mode="Markdown",
     )
 
-    del user_id[user_id] if user_id in user_data else None
+    del user_data[user_id] if user_id in user_data else None
 
 
 # --- BOTU VE SUNUCUYU BAŞLATMA ---
@@ -308,3 +305,4 @@ if __name__ == "__main__":
     except Exception as e:
       print(f"[BAĞLANTI KOPTU] Tekrar bağlanılıyor: {e}")
       time.sleep(3)
+    
