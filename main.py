@@ -41,6 +41,14 @@ def run_web():
 
 
 def limitleri_yukle():
+  # Dosya yoksa otomatik oluştur
+  if not os.path.exists(LIMIT_DOSYASI):
+    try:
+      with open(LIMIT_DOSYASI, "w", encoding="utf-8") as f:
+        json.dump({}, f)
+    except Exception:
+      pass
+
   if os.path.exists(LIMIT_DOSYASI):
     try:
       with open(LIMIT_DOSYASI, "r", encoding="utf-8") as f:
@@ -238,6 +246,7 @@ def callback_query(call):
     func=lambda message: message.chat.type == "private"
     and not message.text.startswith("/")
 )
+    
 def handle_message(message):
   user_id = message.chat.id
 
@@ -292,7 +301,6 @@ def handle_message(message):
 
 # --- BOTU VE SUNUCUYU BAŞLATMA ---
 if __name__ == "__main__":
-  # Flask web sunucusunu arka planda başlatıyoruz
   t = threading.Thread(target=run_web)
   t.daemon = True
   t.start()
@@ -305,4 +313,7 @@ if __name__ == "__main__":
     except Exception as e:
       print(f"[BAĞLANTI KOPTU] Tekrar bağlanılıyor: {e}")
       time.sleep(3)
+      
+
+
     
